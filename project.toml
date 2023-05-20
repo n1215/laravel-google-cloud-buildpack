@@ -1,0 +1,39 @@
+[_]
+id = "laravel-google-cloud-buildpack"
+name = "Laravel + Google Cloud's Buildpack"
+version = "1.0.0"
+schema-version="0.2"
+
+[io.buildpacks]
+builder = "gcr.io/buildpacks/builder:v1"
+exclude = [
+    ".idea",
+    "/README.md",
+    ".git",
+    "/vendor",
+    "/node_modules",
+    "/bootstrap/cache/*.php",
+]
+
+[[io.buildpacks.group]]
+uri = "google.nodejs.runtime"
+[[io.buildpacks.group]]
+uri = "google.nodejs.npm"
+[[io.buildpacks.group]]
+uri = "google.php.runtime"
+[[io.buildpacks.group]]
+uri = "google.php.composer-install"
+[[io.buildpacks.group]]
+uri = "google.php.composer"
+[[io.buildpacks.group]]
+uri = "google.php.webconfig"
+[[io.buildpacks.group]]
+uri = "google.utils.nginx"
+[[io.buildpacks.group]]
+uri = "google.config.entrypoint"
+[[io.buildpacks.group]]
+uri = "google.utils.label-image"
+
+[[io.buildpacks.build.env]]
+name = "GOOGLE_COMPOSER_VERSION"
+value = "2.5.5"
